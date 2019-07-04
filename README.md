@@ -19,7 +19,8 @@ private static TransactionResponse requestTransaction(String login, String passw
 	DocSignatureField docSignField = new DocSignatureField();
 	docSignField.setX(0);
 	docSignField.setY(0);
-	docSignField.setPage(-1);
+	docSignField.setPage(-1)
+	docSignField.setSignerIndex(0);
 
 	TransactionSigner signer = new TransactionSigner();
 	signer.setFirstname("Firstname");
