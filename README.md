@@ -1,5 +1,5 @@
 
-##Synopsis
+## Synopsis
 
 This client gives you access to the Universign API through a java client. You can:
 - request a certificate
