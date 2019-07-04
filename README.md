@@ -10,6 +10,7 @@ This client gives you access to the Universign API through a java client. You ca
 
 1. Example of signature session creation.
 
+```java
 private static TransactionResponse requestTransaction(String login, String password)
 	throws UniversignClientException, IOException
 {
