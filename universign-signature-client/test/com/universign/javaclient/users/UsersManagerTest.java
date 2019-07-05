@@ -79,9 +79,9 @@ public final class UsersManagerTest
         UserDetails[] users = usersManager.listUsers();
         assertNotNull("is null", users);
         assertEquals("incorrect", userDetails.get("firstname"),
-                users[0].getfirstname());
+                users[0].getFirstname());
         assertEquals("incorrect", userDetails.get("lastname"),
-                users[0].getlastname());
+                users[0].getLastname());
         assertEquals("incorrect", userDetails.get("status"),
                 users[0].getStatus());
     }
@@ -116,9 +116,9 @@ public final class UsersManagerTest
         assertEquals("incorrect", personnalInfoMap.get("contact"),
                 personnalInfo.isContact());
         assertEquals("incorrect", personnalInfoMap.get("firstname"),
-                personnalInfo.getfirstname());
+                personnalInfo.getFirstname());
         assertEquals("incorrect", personnalInfoMap.get("lastname"),
-                personnalInfo.getlastname());
+                personnalInfo.getLastname());
         assertEquals("incorrect", personnalInfoMap.get("creationDate"),
                 personnalInfo.getCreationDate());
     }

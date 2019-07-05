@@ -221,9 +221,9 @@ public final class SignatureManagerTest
         Map<String, Object> certificateInfo = new HashMap<String, Object>();
         certificateInfo.put("subject", "certificate");
         Map<String, Object> initiatorInfo = new HashMap<String, Object>();
-        initiatorInfo.put("firstname", "initiator");
+        initiatorInfo.put("firstName", "initiator");
         Map<String, Object> signer = new HashMap<String, Object>();
-        signer.put("firstname", "signataire");
+        signer.put("firstName", "signataire");
         signer.put("certificateInfo", certificateInfo);
         Object[] signerInfos = new Object[1];
         signerInfos[0] = signer;
@@ -242,13 +242,13 @@ public final class SignatureManagerTest
         assertEquals("invalid return", 0,
                 transactionInfo.getCurrentSigner());
         assertEquals("invalid return", "initiator",
-                transactionInfo.getInitiatorInfo().getfirstname());
+                transactionInfo.getInitiatorInfo().getFirstname());
         assertEquals("invalid return", "certificate",
                 transactionInfo.getSignerInfos()
                 .get(0).getCertificateInfo().getSubject());
         assertEquals("invalid return", "signataire",
                 transactionInfo.getSignerInfos()
-                .get(0).getfirstname());
+                .get(0).getFirstname());
         assertTrue("is false", transactionInfo.getEachField());
         assertEquals("invalid return", "ready",
                 transactionInfo.getStatus());
@@ -262,11 +262,11 @@ public final class SignatureManagerTest
         Map<String, Object> certificateInfo = new HashMap<String, Object>();
         certificateInfo.put("subject", "certificate");
         Map<String, Object> initiatorInfo = new HashMap<String, Object>();
-        initiatorInfo.put("firstname", "initiator");
+        initiatorInfo.put("firstName", "initiator");
         Map<String, Object> signer = new HashMap<String, Object>();
-        signer.put("firstname", "signataire");
+        signer.put("firstName", "signataire");
         signer.put("certificateInfo", certificateInfo);
-        signer.put("lastname", "lastname");
+        signer.put("lastName", "lastname");
         Object[] signerInfos = new Object[1];
         signerInfos[0] = signer;
         mockedResult.put("signerInfos", signerInfos);
@@ -285,16 +285,16 @@ public final class SignatureManagerTest
                 transactionInfo.getCurrentSigner());
         assertEquals("invalid return", "initiator",
                 transactionInfo.getInitiatorInfo()
-                .getfirstname());
+                .getFirstname());
         assertEquals("invalid return", "certificate",
                 transactionInfo.getSignerInfos()
                 .get(0).getCertificateInfo().getSubject());
         assertEquals("invalid return", "signataire",
                 transactionInfo.getSignerInfos()
-                .get(0).getfirstname());
+                .get(0).getFirstname());
         assertEquals("invalid return", "lastname",
                 transactionInfo.getSignerInfos()
-                        .get(0).getlastname());
+                        .get(0).getLastname());
         assertTrue("is false", transactionInfo.getEachField());
         assertEquals("invalid return", "ready",
                 transactionInfo.getStatus());

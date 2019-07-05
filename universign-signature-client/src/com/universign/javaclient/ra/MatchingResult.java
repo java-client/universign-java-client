@@ -27,7 +27,7 @@ public class MatchingResult
 	 *
 	 * @return The user lastname.
 	 */
-	public String getlastname()
+	public String getLastname()
 	{
 		return lastname;
 	}
@@ -38,7 +38,7 @@ public class MatchingResult
 	 * @param lastname The user lastname.
 	 * @return The current object instance
 	 */
-	public MatchingResult setlastname(String lastname)
+	public MatchingResult setLastname(String lastname)
 	{
 		this.lastname = lastname;
 		return this;
@@ -49,7 +49,7 @@ public class MatchingResult
 	 *
 	 * @return The user firstname.
 	 */
-	public String getfirstname()
+	public String getFirstname()
 	{
 		return firstname;
 	}
@@ -60,7 +60,7 @@ public class MatchingResult
 	 * @param firstname The user firstname.
 	 * @return The current object instance
 	 */
-	public MatchingResult setfirstname(String firstname)
+	public MatchingResult setFirstname(String firstname)
 	{
 		this.firstname = firstname;
 		return this;

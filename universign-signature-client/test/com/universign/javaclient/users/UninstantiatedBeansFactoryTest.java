@@ -27,8 +27,8 @@ public class UninstantiatedBeansFactoryTest
         assertEquals("incorrect", "test@test",
                 userDetails.getEmail());
         assertEquals("incorrect", "prenomTest",
-                userDetails.getfirstname());
-        assertEquals("incorrect", "nomTest", userDetails.getlastname());
+                userDetails.getFirstname());
+        assertEquals("incorrect", "nomTest", userDetails.getLastname());
         assertEquals("incorrect", 0, userDetails.getStatus());
     }
 
@@ -59,15 +59,15 @@ public class UninstantiatedBeansFactoryTest
         assertEquals("incorrect", map.get("contact"),
                 personnalInfo.isContact());
         assertEquals("incorrect", map.get("firstname"),
-                personnalInfo.getfirstname());
+                personnalInfo.getFirstname());
         assertEquals("incorrect", map.get("lastname"),
-                personnalInfo.getlastname());
+                personnalInfo.getLastname());
         assertEquals("incorrect", map.get("creationDate"),
                 personnalInfo.getCreationDate());
         assertEquals("incorrect", map.get("firstname"),
-                personnalInfo.getfirstname());
+                personnalInfo.getFirstname());
         assertEquals("incorrect", map.get("lastname"),
-                personnalInfo.getlastname());
+                personnalInfo.getLastname());
         assertTrue("is False", personnalInfo.isHasCetificate());
     }
 }

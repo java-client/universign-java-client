@@ -39,8 +39,8 @@ final class UninstantiatedBeansFactory
 	{
 		UserDetails userDetails = new UserDetails();
 		userDetails.setEmail(email)
-				.setfirstname(firstname)
-				.setlastname(lastname)
+				.setFirstname(firstname)
+				.setLastname(lastname)
 				.setStatus(status);
 		return userDetails;
 	}
@@ -68,8 +68,8 @@ final class UninstantiatedBeansFactory
 				KEY_REMAINING_TIMESTAMPS))
 				.setRemainingServerStamps((Integer)map.get(
 				KEY_REMAINING_SERVERSTAMPS))
-				.setfirstname((String)map.get(KEY_FIRSTNAME))
-				.setlastname((String)map.get(KEY_LASTNAME))
+				.setFirstname((String)map.get(KEY_FIRSTNAME))
+				.setLastname((String)map.get(KEY_LASTNAME))
 				.setStatus((Integer)map.get(KEY_STATUS));
 		return persoInfo;
 	}

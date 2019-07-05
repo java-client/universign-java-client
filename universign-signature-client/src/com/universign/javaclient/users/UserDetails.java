@@ -48,7 +48,7 @@ public class UserDetails
 	 *
 	 * @return The user firstname.
 	 */
-	public String getfirstname()
+	public String getFirstname()
 	{
 		return firstname;
 	}
@@ -59,7 +59,7 @@ public class UserDetails
 	 * @param firstname The firstname to set.
 	 * @return The current object instance
 	 */
-	public UserDetails setfirstname(String firstname)
+	public UserDetails setFirstname(String firstname)
 	{
 		this.firstname = firstname;
 		return this;
@@ -70,7 +70,7 @@ public class UserDetails
 	 *
 	 * @return The user lastename.
 	 */
-	public String getlastname()
+	public String getLastname()
 	{
 		return lastname;
 	}
@@ -81,7 +81,7 @@ public class UserDetails
 	 * @param lastname The lastname to set.
 	 * @return The current object instance
 	 */
-	public UserDetails setlastname(String lastname)
+	public UserDetails setLastname(String lastname)
 	{
 		this.lastname = lastname;
 		return this;

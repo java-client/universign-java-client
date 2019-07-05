@@ -30,8 +30,8 @@ final class UninstantiatedBeansFactory
 			String certificateLevel)
 	{
 		MatchingResult matchResult = new MatchingResult();
-		matchResult.setlastname(lastname)
-				.setfirstname(firstname)
+		matchResult.setLastname(lastname)
+				.setFirstname(firstname)
 				.setMobile(mobile)
 				.setEmail(email)
 				.setCertificateLevel(certificateLevel);

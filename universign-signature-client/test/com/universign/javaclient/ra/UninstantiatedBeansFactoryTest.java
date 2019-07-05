@@ -25,9 +25,9 @@ public class UninstantiatedBeansFactoryTest
         //then
         assertNotNull("is null", matchingResult);
         assertEquals("invalid return", "last",
-                matchingResult.getlastname());
+                matchingResult.getLastname());
         assertEquals("invalid return", "first",
-                matchingResult.getfirstname());
+                matchingResult.getFirstname());
         assertEquals("invalid return", "06",
                 matchingResult.getMobile());
         assertEquals("invalid return", "test@test",

@@ -69,8 +69,8 @@ final class UninstantiatedBeansFactory
 	{
 		InitiatorInfo initInfo = new InitiatorInfo();
 		initInfo.setEmail(email)
-				.setfirstname(firstname)
-				.setlastname(lastname);
+				.setFirstname(firstname)
+				.setLastname(lastname);
 		return initInfo;
 	}
 
@@ -157,8 +157,8 @@ final class UninstantiatedBeansFactory
 				.setCertificateInfo(certificateInfo)
 				.setUrl((String)map.get(KEY_URL))
 				.setEmail((String)map.get(KEY_EMAIL))
-				.setfirstname((String)map.get(KEY_FIRSTNAME))
-				.setlastname((String)map.get(KEY_LASTNAME))
+				.setFirstname((String)map.get(KEY_FIRSTNAME))
+				.setLastname((String)map.get(KEY_LASTNAME))
 				.setRefusedDocs((int[])map.get(KEY_REFUSED_DOCS))
 				.setActionDate((Date)map.get(KEY_ACTION_DATE));
 	}

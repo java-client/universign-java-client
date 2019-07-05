@@ -44,26 +44,28 @@ public class UninstantiatedBeansFactoryTest
         assertEquals("invalid return", "azert@azert.com",
                 initiatorInfo.getEmail());
         assertEquals("invalid return", "azert",
-                initiatorInfo.getfirstname());
+                initiatorInfo.getFirstname());
         assertEquals("invalid return", "azert",
-                initiatorInfo.getlastname());
+                initiatorInfo.getLastname());
     }
 
     @Test
     public void shouldReturnTransactionInfoObject()
     {
         //given
-        CertificateInfo certificateInfo = new CertificateInfo();
-        certificateInfo.setIssuer("test");
-        SignerInfo signerInfo = new SignerInfo();
-        signerInfo.setfirstname("test")
-                .setlastname("test")
-                .setEmail("test")
-                .setCertificateInfo(certificateInfo);
+        Map<String,Object> certificateInfo = new HashMap<String, Object>();
+        certificateInfo.put("issuer", "certIssuer");
+        certificateInfo.put("subject", "certSubject");
+        Map<String, Object> signerInfo = new HashMap<String, Object>();
+        signerInfo.put("firstName", "test");
+        signerInfo.put("lastName", "test");
+        signerInfo.put("certificateInfo", certificateInfo);
         Object[] list = new Object[1];
         list[0] = signerInfo;
         Map initiatorInfo = new HashMap();
         initiatorInfo.put("email", "test");
+        initiatorInfo.put("firstName", "initiatorFirst");
+        initiatorInfo.put("lastName", "initiatorLast");
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("signerInfos", list);
         map.put("certificateInfo", certificateInfo);
@@ -76,19 +78,27 @@ public class UninstantiatedBeansFactoryTest
                 .createTransactionInfo(map);
         //then
         assertNotNull("is null", transactionInfo);
-        assertEquals("invalid return", signerInfo.getEmail(),
+        assertEquals("invalid return", signerInfo.get("email"),
                 transactionInfo.getSignerInfos()
                 .get(0).getEmail());
-        assertEquals("invalid return", signerInfo.getfirstname(),
+        assertEquals("invalid return", signerInfo.get("firstName"),
                 transactionInfo.getSignerInfos()
-                .get(0).getfirstname());
-        assertEquals("invalid return", certificateInfo.getIssuer(),
+                .get(0).getFirstname());
+        assertEquals("invalid return", signerInfo.get("lastName"),
+                transactionInfo.getSignerInfos()
+                        .get(0).getLastname());
+        assertEquals("invalid return", certificateInfo.get("issuer"),
                 transactionInfo.getSignerInfos()
                 .get(0).getCertificateInfo().getIssuer());
+        assertEquals("invalid return", certificateInfo.get("subject"),
+                transactionInfo.getSignerInfos()
+                        .get(0).getCertificateInfo().getSubject());
         assertEquals("invalid return", initiatorInfo.get("email"),
                 transactionInfo.getInitiatorInfo().getEmail());
-        assertEquals("invalid return", initiatorInfo.get("firstname"),
-                transactionInfo.getInitiatorInfo().getfirstname());
+        assertEquals("invalid return", initiatorInfo.get("firstName"),
+                transactionInfo.getInitiatorInfo().getFirstname());
+        assertEquals("invalid return", initiatorInfo.get("lastName"),
+                transactionInfo.getInitiatorInfo().getLastname());
     }
 
     @Test
@@ -102,8 +112,8 @@ public class UninstantiatedBeansFactoryTest
         certificateInfoMap.put("issuer", "test");
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("certificateInfo", certificateInfoMap);
-        map.put("lastname", "test");
-        map.put("firstname", "test");
+        map.put("lastName", "test");
+        map.put("firstName", "test");
         map.put("error", "fakeError");
         map.put("actionDate", new Date());
         //when
@@ -112,9 +122,9 @@ public class UninstantiatedBeansFactoryTest
         //then
         assertNotNull("is null", signerInfo);
         assertEquals("invalid return", "test",
-                signerInfo.getfirstname());
+                signerInfo.getFirstname());
         assertEquals("invalid return", "test",
-                signerInfo.getlastname());
+                signerInfo.getLastname());
         assertEquals("invalid return", "fakeError",
                 signerInfo.getError());
         assertEquals("invalid return", certificateInfoMap.get("issuer"),

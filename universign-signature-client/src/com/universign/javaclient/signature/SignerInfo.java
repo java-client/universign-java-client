@@ -170,7 +170,7 @@ public class SignerInfo
 	 *
 	 * @return The signer/observer firstname.
 	 */
-	public String getfirstname()
+	public String getFirstname()
 	{
 		return firstname;
 	}
@@ -181,7 +181,7 @@ public class SignerInfo
 	 * @param firstname The signer/observer firstname.
 	 * @return The current object instance
 	 */
-	public SignerInfo setfirstname(String firstname)
+	public SignerInfo setFirstname(String firstname)
 	{
 		this.firstname = firstname;
 		return this;
@@ -192,7 +192,7 @@ public class SignerInfo
 	 *
 	 * @return The signer/observer lastname.
 	 */
-	public String getlastname()
+	public String getLastname()
 	{
 		return lastname;
 	}
@@ -203,7 +203,7 @@ public class SignerInfo
 	 * @param lastname The signer/observer lastname.
 	 * @return The current object instance
 	 */
-	public SignerInfo setlastname(String lastname)
+	public SignerInfo setLastname(String lastname)
 	{
 		this.lastname = lastname;
 		return this;

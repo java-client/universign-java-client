@@ -47,7 +47,7 @@ public class InitiatorInfo
 	 *
 	 * @return The requester firstname.
 	 */
-	public String getfirstname()
+	public String getFirstname()
 	{
 		return firstname;
 	}
@@ -58,7 +58,7 @@ public class InitiatorInfo
 	 * @param firstname The requester first name.
 	 * @return The current object instance
 	 */
-	public InitiatorInfo setfirstname(String firstname)
+	public InitiatorInfo setFirstname(String firstname)
 	{
 		this.firstname = firstname;
 		return this;
@@ -69,7 +69,7 @@ public class InitiatorInfo
 	 *
 	 * @return The requester lastname.
 	 */
-	public String getlastname()
+	public String getLastname()
 	{
 		return lastname;
 	}
@@ -80,7 +80,7 @@ public class InitiatorInfo
 	 * @param lastname The requester last name.
 	 * @return The current object instance
 	 */
-	public InitiatorInfo setlastname(String lastname)
+	public InitiatorInfo setLastname(String lastname)
 	{
 		this.lastname = lastname;
 		return this;

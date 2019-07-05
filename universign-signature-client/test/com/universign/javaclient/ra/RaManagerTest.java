@@ -86,12 +86,12 @@ public class RaManagerTest
                         (String)matching.get("email"), null);
         assertNotNull("is null", results);
         assertTrue("is false", results[0] instanceof MatchingResult);
-        assertEquals("invalid return", matchRes.getlastname(),
-                results[0].getlastname());
+        assertEquals("invalid return", matchRes.getLastname(),
+                results[0].getLastname());
         assertEquals("invalid return", matchRes.getEmail(),
                 results[0].getEmail());
-        assertEquals("invalid return", matchRes.getfirstname(),
-                results[0].getfirstname());
+        assertEquals("invalid return", matchRes.getFirstname(),
+                results[0].getFirstname());
     }
 
     @Test
@@ -137,8 +137,8 @@ public class RaManagerTest
         when(client.execute(eq("validator.validate"),
                 any(Object[].class))).thenReturn(mockedResult);
         PersonalInfo personalInfo = new PersonalInfo();
-        personalInfo.setfirstname("firstname")
-                .setlastname("lastname");
+        personalInfo.setFirstname("firstname")
+                .setLastname("lastname");
         IdDocument idDocument = new IdDocument();
         idDocument.setType(RaConstants.IdDocumentTypes.FRENCH_PASSEPORT);
         ValidationRequest validationRequest = new ValidationRequest();

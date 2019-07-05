@@ -34,7 +34,7 @@ public class PersonalInfo
 	 *
 	 * @return The user lastname.
 	 */
-	public String getlastname()
+	public String getLastname()
 	{
 		return lastname;
 	}
@@ -45,7 +45,7 @@ public class PersonalInfo
 	 * @param lastname The user lastname.
 	 * @return The current object instance
 	 */
-	public PersonalInfo setlastname(String lastname)
+	public PersonalInfo setLastname(String lastname)
 	{
 		this.lastname = lastname;
 		return this;
@@ -56,7 +56,7 @@ public class PersonalInfo
 	 *
 	 * @return The user firstname.
 	 */
-	public String getfirstname()
+	public String getFirstname()
 	{
 		return firstname;
 	}
@@ -67,7 +67,7 @@ public class PersonalInfo
 	 * @param firstname The user firstname.
 	 * @return The current object instance
 	 */
-	public PersonalInfo setfirstname(String firstname)
+	public PersonalInfo setFirstname(String firstname)
 	{
 		this.firstname = firstname;
 		return this;
