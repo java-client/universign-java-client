@@ -71,7 +71,6 @@ public class SignatureConstants
 		ID_TYPE_ID_CARD_FR("id_card_fr"),
 		ID_TYPE_PASSPORT_EU("passport_eu"),
 		ID_TYPE_TITRE_SEJOUR("titre_sejour");
-		/*ID_TYPE_DRIVE_LICENCE("drive_licence");*/
 
 		private String type;
 
@@ -165,7 +164,6 @@ public class SignatureConstants
 	 */
 	public enum CertificateType
 	{
-		CERTIFICATE_TYPE_LOCAL("local"),
 		CERTIFICATE_TYPE_CERTIFIED("certified"),
 		CERTIFICATE_TYPE_ADVANCED("advanced"),
 		CERTIFICATE_TYPE_SIMPLE("simple");
