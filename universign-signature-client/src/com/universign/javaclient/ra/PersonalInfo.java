@@ -3,8 +3,8 @@ package com.universign.javaclient.ra;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.universign.javaclient.utils.CustomDateDeserializer;
-import com.universign.javaclient.utils.CustomDateSerializer;
+import com.universign.javaclient.utils.JsonDateDeserializer;
+import com.universign.javaclient.utils.JsonDateSerializer;
 
 import java.util.Date;
 
@@ -17,8 +17,8 @@ public class PersonalInfo
 {
 	private String lastname;
 	private String firstname;
-	@JsonSerialize(using = CustomDateSerializer.class)
-	@JsonDeserialize(using = CustomDateDeserializer.class)
+	@JsonSerialize(using = JsonDateSerializer.class)
+	@JsonDeserialize(using = JsonDateDeserializer.class)
 	private Date birthDate;
 
 	/**

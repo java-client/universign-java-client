@@ -1,11 +1,14 @@
 
 package com.universign.javaclient.ra;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * Describes the data needed to be sent in order to launch
  * a validation session.
  *
  */
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class ValidationRequest
 {
 	private IdDocument idDocument;

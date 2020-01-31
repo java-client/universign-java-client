@@ -32,6 +32,9 @@ final class UninstantiatedBeansFactory
 	static final String KEY_EACH_FIELD = "eachField";
 	static final String KEY_CUSTOMID = "customId";
 	static final String KEY_TRANSACTIONID = "transactionId";
+	static final String KEY_REDIRECT_POLICY = "redirectPolicy";
+	static final String KEY_REDIRECT_WAIT = "redirectWait";
+	static final String KEY_REFUSAL_COMMENT = "refusalComment";
 
 	private UninstantiatedBeansFactory()
 	{
@@ -81,6 +84,7 @@ final class UninstantiatedBeansFactory
 	 * attributes.
 	 * @return The created TransactionInfo object
 	 */
+	@SuppressWarnings("unchecked")
 	static TransactionInfo createTransactionInfo(
 			Map<String, Object> map)
 	{
@@ -93,7 +97,6 @@ final class UninstantiatedBeansFactory
 					.objectToMap(list[i]);
 			listSigner.add(createSignerInfo(mapList));
 		}
-		@SuppressWarnings("unchecked")
 		Map<String, Object> initInfoMap = (Map<String, Object>)
 				map.get(KEY_INITIATOR_INFO);
 		InitiatorInfo initiatorInfo = createInitiatorInfo(
@@ -104,17 +107,21 @@ final class UninstantiatedBeansFactory
 				.setStatus((String)map.get(KEY_STATUS))
 				.setSignerInfos(listSigner)
 				.setCurrentSigner(
-				(Integer)map.get(KEY_CURRENT_SIGNER))
+						(Integer)map.get(KEY_CURRENT_SIGNER))
 				.setCreationDate(
-				(Date)map.get(KEY_CREATION_DATE))
+						(Date)map.get(KEY_CREATION_DATE))
 				.setDescription(
-				(String)map.get(KEY_DESCRIPTION))
+						(String)map.get(KEY_DESCRIPTION))
 				.setInitiatorInfo(initiatorInfo)
 				.setEachField(
-				(Boolean)map.get(KEY_EACH_FIELD))
+						(Boolean)map.get(KEY_EACH_FIELD))
 				.setCustomId((String)map.get(KEY_CUSTOMID))
 				.setTransactionId(
-				(String)map.get(KEY_TRANSACTIONID));
+						(String)map.get(KEY_TRANSACTIONID))
+				.setRedirectPolicy((SignatureConstants.RedirectPolicy)
+						map.get(KEY_REDIRECT_POLICY))
+				.setRedirectWait(map.get(KEY_REDIRECT_WAIT) != null ?
+						(Integer)map.get(KEY_REDIRECT_WAIT) : 5);
 	}
 
 	/**
@@ -138,19 +145,22 @@ final class UninstantiatedBeansFactory
 	 * @param map The Map contains values of the SignerInfo attributes.
 	 * @return The created SignerInfo object.
 	 */
+	@SuppressWarnings("unchecked")
 	static SignerInfo createSignerInfo(
 			Map<String, Object> map)
 	{
 		//Using Java Map because the parameters number is greater
 		//than 8 authorized
-		@SuppressWarnings("unchecked")
 		Map<String, Object> certificateInfoMap = (Map<String, Object>)
 				map.get(KEY_CERT_INFO);
-		CertificateInfo certificateInfo = createCertificateInfo(
-				(String)certificateInfoMap.get("subject"),
-				(String)certificateInfoMap.get("issuer"),
-				(String)certificateInfoMap.get("serial"));
+		CertificateInfo certificateInfo = null;
+		if (certificateInfoMap != null && !certificateInfoMap.isEmpty()) {
 
+			certificateInfo = createCertificateInfo(
+					(String)certificateInfoMap.get("subject"),
+					(String)certificateInfoMap.get("issuer"),
+					(String)certificateInfoMap.get("serial"));
+		}
 		return new SignerInfo()
 				.setStatus((String)map.get(KEY_SIGNER_STATUS))
 				.setError((String)map.get(KEY_ERROR))
@@ -160,6 +170,11 @@ final class UninstantiatedBeansFactory
 				.setFirstname((String)map.get(KEY_FIRSTNAME))
 				.setLastname((String)map.get(KEY_LASTNAME))
 				.setRefusedDocs((int[])map.get(KEY_REFUSED_DOCS))
-				.setActionDate((Date)map.get(KEY_ACTION_DATE));
+				.setActionDate((Date)map.get(KEY_ACTION_DATE))
+				.setRefusalComment((String)map.get(KEY_REFUSAL_COMMENT))
+				.setRedirectPolicy((SignatureConstants.RedirectPolicy)
+						map.get(KEY_REDIRECT_POLICY))
+				.setRedirectWait(map.get(KEY_REDIRECT_WAIT) != null ?
+						(Integer)map.get(KEY_REDIRECT_WAIT) : 5);
 	}
 }

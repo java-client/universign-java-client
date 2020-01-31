@@ -15,15 +15,15 @@ import java.util.Date;
  * Describes the custom Jackson library Date deserializer
  *
  */
-public class CustomDateDeserializer extends StdDeserializer<Date>
+public class JsonDateDeserializer extends StdDeserializer<Date>
 {
     private SimpleDateFormat formatter =
-            new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+            new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
     /**
-     * The default CustomDteDeserializer constructor
+     * The default JsonDteDeserializer constructor
      */
-    public CustomDateDeserializer()
+    public JsonDateDeserializer()
     {
         super(Date.class);
     }
@@ -33,7 +33,7 @@ public class CustomDateDeserializer extends StdDeserializer<Date>
                             DeserializationContext context)
             throws IOException, RuntimeException
     {
-        String date = jsonparser.getValueAsString();
+        String date = jsonparser.getText();
         try {
             return formatter.parse(date);
         } catch (ParseException e) {

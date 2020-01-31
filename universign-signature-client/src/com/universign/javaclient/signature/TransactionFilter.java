@@ -1,11 +1,11 @@
-// $Id:  $
 
 package com.universign.javaclient.signature;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.universign.javaclient.utils.CustomDateSerializer;
-import com.universign.javaclient.utils.CustomDateDeserializer;
+import com.universign.javaclient.utils.JsonDateSerializer;
+import com.universign.javaclient.utils.JsonDateDeserializer;
 
 import java.util.Date;
 
@@ -13,24 +13,25 @@ import java.util.Date;
  * Describes a filter on transactions.
  *
  */
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class TransactionFilter
 {
 	private String requesterEmail;
 	private String profile;
-	@JsonSerialize(using = CustomDateSerializer.class)
-	@JsonDeserialize(using = CustomDateDeserializer.class)
+	@JsonDeserialize(using = JsonDateDeserializer.class)
+	@JsonSerialize(using = JsonDateSerializer.class)
 	private Date notBefore;
-	@JsonSerialize(using = CustomDateSerializer.class)
-	@JsonDeserialize(using = CustomDateDeserializer.class)
+	@JsonDeserialize(using = JsonDateDeserializer.class)
+	@JsonSerialize(using = JsonDateSerializer.class)
 	private Date notAfter;
 	private int startRange;
 	private int stopRange;
 	private String signerId;
-	@JsonSerialize(using = CustomDateSerializer.class)
-	@JsonDeserialize(using = CustomDateDeserializer.class)
+	@JsonDeserialize(using = JsonDateDeserializer.class)
+	@JsonSerialize(using = JsonDateSerializer.class)
 	private Date notBeforeCompletion;
-	@JsonSerialize(using = CustomDateSerializer.class)
-	@JsonDeserialize(using = CustomDateDeserializer.class)
+	@JsonDeserialize(using = JsonDateDeserializer.class)
+	@JsonSerialize(using = JsonDateSerializer.class)
 	private Date notAfterCompletion;
 	private int status;
 	private boolean withAffiliated;
@@ -49,7 +50,7 @@ public class TransactionFilter
 	 * Sets the requester email address.
 	 *
 	 * @param requesterEmail The email to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionFilter setRequesterEmail(String requesterEmail)
 	{
@@ -71,7 +72,7 @@ public class TransactionFilter
 	 * Sets the signature profile name.
 	 *
 	 * @param profile The profile name to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionFilter setProfile(String profile)
 	{
@@ -93,7 +94,7 @@ public class TransactionFilter
 	 * Sets the date after which the transaction was created.
 	 *
 	 * @param notBefore The date to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionFilter setNotBefore(Date notBefore)
 	{
@@ -115,7 +116,7 @@ public class TransactionFilter
 	 * Sets the date before which the transaction was created.
 	 *
 	 * @param notAfter The date to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionFilter setNotAfter(Date notAfter)
 	{
@@ -138,7 +139,7 @@ public class TransactionFilter
 	 * default value is <code>0</code>.
 	 *
 	 * @param startRange The index to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionFilter setStartRange(int startRange)
 	{
@@ -161,7 +162,7 @@ public class TransactionFilter
 	 * default and maximum value is <code>StartRange+1000</code>.
 	 *
 	 * @param stopRange The index to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionFilter setStopRange(int stopRange)
 	{
@@ -183,7 +184,7 @@ public class TransactionFilter
 	 * Sets the id of signer.
 	 *
 	 * @param signerId The id to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionFilter setSignerId(String signerId)
 	{
@@ -205,7 +206,7 @@ public class TransactionFilter
 	 * Sets the date after which the transactions are completed.
 	 *
 	 * @param notBeforeCompletion The date to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionFilter setNotBeforeCompletion(
 			Date notBeforeCompletion)
@@ -228,7 +229,7 @@ public class TransactionFilter
 	 * Sets the date before which the transactions are completed.
 	 *
 	 * @param notAfterCompletion The date to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionFilter setNotAfterCompletion(Date notAfterCompletion)
 	{
@@ -250,7 +251,7 @@ public class TransactionFilter
 	 * Sets the transaction status.
 	 *
 	 * @param status The status of transaction to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionFilter setStatus(int status)
 	{
@@ -273,7 +274,7 @@ public class TransactionFilter
 	 * <code>true</code> if the own transaction won't be listed.
 	 *
 	 * @param withAffiliated The filter to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionFilter setWithAffiliated(boolean withAffiliated)
 	{

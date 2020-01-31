@@ -80,7 +80,7 @@ public final class SignatureManager
 			throws UniversignClientException
 	{
 		return create(login, password, url,
-				3000, 5000);
+				5000, 5000);
 	}
 
 	/**
@@ -93,11 +93,11 @@ public final class SignatureManager
 	 * @throws UniversignClientException Universign Client Exception.
 	 */
 	public static SignatureManager create(String login,
-			String password)
-		throws UniversignClientException
+										  String password)
+			throws UniversignClientException
 	{
 		return create(login, password, SignatureUrl.PROD_URL,
-				3000, 5000);
+				5000, 5000);
 	}
 
 	/**
@@ -107,6 +107,7 @@ public final class SignatureManager
 	 * @return The TransactionResponse object.
 	 * @throws UniversignClientException Universign Client Exception.
 	 */
+	@SuppressWarnings("unchecked")
 	public TransactionResponse requestTransaction(
 			TransactionRequest transaction)
 			throws UniversignClientException
@@ -114,14 +115,13 @@ public final class SignatureManager
 		Map<String, Object> request =
 				Utils.objectToMap(transaction);
 		try {
-			@SuppressWarnings("unchecked")
 			Map<String, Object> result = (Map<String, Object>)client
 					.execute("requester.requestTransaction",
-					new Object[]{request});
+							new Object[]{request});
 			return UninstantiatedBeansFactory
-				.createTransactionResponse(
-						(String)result.get("url"),
-						(String)result.get("id"));
+					.createTransactionResponse(
+							(String)result.get("url"),
+							(String)result.get("id"));
 		} catch (XmlRpcException e) {
 			throw new UniversignClientException(
 					"Invalid Request", e);
@@ -158,7 +158,7 @@ public final class SignatureManager
 	 * @throws UniversignClientException Universign Client Exception.
 	 */
 	public byte[] signWithOptions(byte[] document,
-			SignOptions options) throws UniversignClientException
+								  SignOptions options) throws UniversignClientException
 	{
 		Map<String, Object> opt = Utils.objectToMap(options);
 		Object[] params = new Object[2];
@@ -181,6 +181,7 @@ public final class SignatureManager
 	 * @return The retrieved documents.
 	 * @throws UniversignClientException Universign Client Exception.
 	 */
+	@SuppressWarnings("unchecked")
 	public TransactionDocument[] getDocuments(String transactionId)
 			throws UniversignClientException
 	{
@@ -189,14 +190,13 @@ public final class SignatureManager
 					"requester.getDocuments",
 					new Object[]{transactionId});
 			TransactionDocument[] documents =
-				new TransactionDocument[result.length];
+					new TransactionDocument[result.length];
 			for (int i = 0; i < result.length; i++) {
-				@SuppressWarnings("unchecked")
 				Map<String, Object> map =
 						(Map<String, Object>)result[i];
 				documents[i] = Utils.mapToObject(
-				map, TransactionDocument.class);
-				}
+						map, TransactionDocument.class);
+			}
 			return documents;
 		} catch (XmlRpcException e) {
 			throw new UniversignClientException(
@@ -222,19 +222,19 @@ public final class SignatureManager
 					"requester.getDocumentsByCustomId",
 					new Object[]{customId});
 			TransactionDocument[] documents =
-				new TransactionDocument[result.length];
+					new TransactionDocument[result.length];
 			for (int i = 0; i < result.length; i++) {
 				Map<String, Object> map =
 						(Map<String, Object>)result[i];
-			documents[i] = Utils.mapToObject(
-					map, TransactionDocument.class);
+				documents[i] = Utils.mapToObject(
+						map, TransactionDocument.class);
 			}
 			return documents;
-			} catch (XmlRpcException e) {
-				throw new UniversignClientException(
-				        "Unable to retrieve the Documents", e);
-				}
+		} catch (XmlRpcException e) {
+			throw new UniversignClientException(
+					"Unable to retrieve the Documents", e);
 		}
+	}
 
 	/**
 	 * Describes the requester.getTransactionInfo web service call.
@@ -244,20 +244,20 @@ public final class SignatureManager
 	 * @return The TransactionInfo structure.
 	 * @throws UniversignClientException Universign Client Exception.
 	 */
+	@SuppressWarnings("unchecked")
 	public TransactionInfo getTransactionInfo(String transactionId)
 			throws UniversignClientException
 	{
 		try {
-			@SuppressWarnings("unchecked")
 			Map<String, Object> result = (Map<String, Object>)client
 					.execute("requester.getTransactionInfo",
-					new Object[]{transactionId});
+							new Object[]{transactionId});
 			return UninstantiatedBeansFactory
 					.createTransactionInfo(result);
 		} catch (XmlRpcException e) {
 			throw new UniversignClientException(
 					"Unable to retrieve the transaction"
-					+ "information", e);
+							+ "information", e);
 		}
 	}
 
@@ -270,20 +270,20 @@ public final class SignatureManager
 	 * @return The TransactionInfo structure.
 	 * @throws UniversignClientException Universign Client Exception.
 	 */
+	@SuppressWarnings("unchecked")
 	public TransactionInfo getTransactionInfoByCustomId(
 			String customId) throws UniversignClientException
 	{
 		try {
-			@SuppressWarnings("unchecked")
 			Map<String, Object> result = (Map<String, Object>)client
 					.execute("requester.getTransactionInfo"
-					+ "ByCustomId",	new Object[]{customId});
+							+ "ByCustomId",	new Object[]{customId});
 			return UninstantiatedBeansFactory
 					.createTransactionInfo(result);
 		} catch (XmlRpcException e) {
 			throw new UniversignClientException(
 					"Unable to retrieve the transaction"
-					+ "information", e);
+							+ "information", e);
 		}
 	}
 
@@ -342,7 +342,7 @@ public final class SignatureManager
 					new Object[]{filter});
 			String[] list = new String[result.length];
 			for (int i = 0; i < result.length; i++) {
-			list[i] = (String)result[i];
+				list[i] = (String)result[i];
 			}
 			return list;
 		} catch (XmlRpcException e) {
@@ -359,6 +359,7 @@ public final class SignatureManager
 	 * @return The TransactionResponse object.
 	 * @throws UniversignClientException Universign Client Exception.
 	 */
+	@SuppressWarnings("unchecked")
 	public TransactionResponse requestRegistration(
 			StandaloneRegistrationRequest request)
 			throws UniversignClientException
@@ -366,14 +367,13 @@ public final class SignatureManager
 		Map<String, Object> mappedRequest =
 				Utils.objectToMap(request);
 		try {
-			@SuppressWarnings("unchecked")
 			Map<String, Object> result = (Map<String, Object>)client
 					.execute("requester.requestRegistration",
-					new Object[]{mappedRequest});
+							new Object[]{mappedRequest});
 			return UninstantiatedBeansFactory
-				.createTransactionResponse(
-						(String)result.get("url"),
-						(String)result.get("id"));
+					.createTransactionResponse(
+							(String)result.get("url"),
+							(String)result.get("id"));
 		} catch (XmlRpcException e) {
 			throw new UniversignClientException(
 					"Invalid request", e);
@@ -389,7 +389,7 @@ public final class SignatureManager
 	 */
 	public void requestTwoStepsRegistration(
 			StandaloneRegistrationRequest request)
-					throws UniversignClientException
+			throws UniversignClientException
 	{
 		Map<String, Object> mappedRequest =
 				Utils.objectToMap(request);

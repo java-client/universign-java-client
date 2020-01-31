@@ -23,8 +23,8 @@ final class UninstantiatedBeansFactory
 	static final String KEY_REMAINING_SIGNATURE = "remainingSignatures";
 	static final String KEY_REMAINING_TIMESTAMPS = "remainingTimestamps";
 	static final String KEY_REMAINING_SERVERSTAMPS =
-			"remainingServerstamps";
-	static final String KEY_EMAIL = "email";
+			"remainingServerStamps";
+	static final String KEY_USER_MAIL = "email";
 	static final String KEY_FIRSTNAME = "firstname";
 	static final String KEY_LASTNAME = "lastname";
 	static final String KEY_STATUS = "status";
@@ -35,7 +35,7 @@ final class UninstantiatedBeansFactory
 	}
 
 	static UserDetails createUserDetails(String email, String firstname,
-			String lastname, int status)
+										 String lastname, int status)
 	{
 		UserDetails userDetails = new UserDetails();
 		userDetails.setEmail(email)
@@ -57,17 +57,18 @@ final class UninstantiatedBeansFactory
 				.setCreationDate((Date)map.get(KEY_CREATION_DATE))
 				.setLastLogin((Date)map.get(KEY_LAST_LOGIN_DATE))
 				.setOperatorStatus((Integer)map.get(
-				KEY_OPERATOR_STATUS))
+						KEY_OPERATOR_STATUS))
 				.setAdmin((Boolean)map.get(KEY_ADMIN))
 				.setContact((Boolean)map.get(KEY_CONTACT))
 				.setHasCetificate((Boolean)map.get(
-				KEY_HAS_CERIFICATE))
+						KEY_HAS_CERIFICATE))
 				.setRemainingSignatures((Integer)map.get(
-				KEY_REMAINING_SIGNATURE))
+						KEY_REMAINING_SIGNATURE))
 				.setRemainingTimestamps((Integer)map.get(
-				KEY_REMAINING_TIMESTAMPS))
+						KEY_REMAINING_TIMESTAMPS))
 				.setRemainingServerStamps((Integer)map.get(
-				KEY_REMAINING_SERVERSTAMPS))
+						KEY_REMAINING_SERVERSTAMPS))
+				.setEmail((String)map.get((KEY_USER_MAIL)))
 				.setFirstname((String)map.get(KEY_FIRSTNAME))
 				.setLastname((String)map.get(KEY_LASTNAME))
 				.setStatus((Integer)map.get(KEY_STATUS));

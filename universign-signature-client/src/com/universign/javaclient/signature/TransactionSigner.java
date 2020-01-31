@@ -1,13 +1,14 @@
 
 package com.universign.javaclient.signature;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.universign.javaclient.signature.SignatureConstants.Language;
 import com.universign.javaclient.signature.SignatureConstants.CertificateType;
 import com.universign.javaclient.signature.SignatureConstants.Role;
-import com.universign.javaclient.utils.CustomDateDeserializer;
-import com.universign.javaclient.utils.CustomDateSerializer;
+import com.universign.javaclient.utils.JsonDateDeserializer;
+import com.universign.javaclient.utils.JsonDateSerializer;
 
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import java.util.Date;
  * Describes and contains all information of signer.
  *
  */
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class TransactionSigner
 {
 	private String firstname;
@@ -25,16 +27,19 @@ public class TransactionSigner
 	private String phoneNum;
 	private Language language;
 	private Role role;
-	@JsonSerialize(using = CustomDateSerializer.class)
-	@JsonDeserialize(using = CustomDateDeserializer.class)
+	@JsonDeserialize(using = JsonDateDeserializer.class)
+	@JsonSerialize(using = JsonDateSerializer.class)
 	private Date birthDate;
 	private String universignId;
-	private String successURL;
-	private String cancelURL;
-	private String failURL;
+	private RedirectionConfig successRedirection;
+	private RedirectionConfig cancelRedirection;
+	private RedirectionConfig failRedirection;
 	private CertificateType certificateType;
 	private RegistrationRequest idDocuments;
 	private String validationSessionId;
+	private SignatureConstants.RedirectPolicy redirectPolicy;
+	private int redirectWait;
+	private boolean autoSendAgreements;
 
 	/**
 	 * Returns the signer firstname.
@@ -178,13 +183,13 @@ public class TransactionSigner
 		return language;
 	}
 
-    /**
-     * Sets the signer language.
-     *
-     * @param language The language of signer.
+	/**
+	 * Sets the signer language.
+	 *
+	 * @param language The language of signer.
 	 * @return The current object instance
-     */
-    public TransactionSigner setLanguage(Language language)
+	 */
+	public TransactionSigner setLanguage(Language language)
 	{
 		this.language = language;
 		return this;
@@ -265,21 +270,22 @@ public class TransactionSigner
 	 *
 	 * @return The successURL redirection.
 	 */
-	public String getSuccessURL()
+	public RedirectionConfig getSuccessRedirection()
 	{
-		return successURL;
+		return successRedirection;
 	}
 
 	/**
 	 * Sets the URL to where the signer will be redirected
 	 * after the signatures are completed.
 	 *
-	 * @param successURL The redirection url to set.
+	 * @param successRedirection The redirection url to set.
 	 * @return The current object instance
 	 */
-	public TransactionSigner setSuccessURL(String successURL)
+	public TransactionSigner setSuccessRedirection(
+			RedirectionConfig successRedirection)
 	{
-		this.successURL = successURL.trim();
+		this.successRedirection = successRedirection;
 		return this;
 	}
 
@@ -289,21 +295,22 @@ public class TransactionSigner
 	 *
 	 * @return The cancelURL redirection.
 	 */
-	public String getCancelURL()
+	public RedirectionConfig getCancelRedirection()
 	{
-		return cancelURL;
+		return cancelRedirection;
 	}
 
 	/**
 	 * Sets the URL to where the signer will be redirected
 	 * after the signatures are canceled.
 	 *
-	 * @param cancelURL The redirection url to set.
+	 * @param cancelRedirection The redirection url to set.
 	 * @return The current object instance
 	 */
-	public TransactionSigner setCancelURL(String cancelURL)
+	public TransactionSigner setCancelRedirection(
+			RedirectionConfig cancelRedirection)
 	{
-		this.cancelURL = cancelURL.trim();
+		this.cancelRedirection = cancelRedirection;
 		return this;
 	}
 
@@ -313,21 +320,22 @@ public class TransactionSigner
 	 *
 	 * @return The failURL redirection.
 	 */
-	public String getFailURL()
+	public RedirectionConfig getFailRedirection()
 	{
-		return failURL;
+		return failRedirection;
 	}
 
 	/**
 	 * Sets the URL to where the signer will be redirected
 	 * after the signatures are failed.
 	 *
-	 * @param failURL The redirection url to set.
+	 * @param failRedirection The redirection url to set.
 	 * @return The current object instance
 	 */
-	public TransactionSigner setFailURL(String failURL)
+	public TransactionSigner setFailRedirection(
+			RedirectionConfig failRedirection)
 	{
-		this.failURL = failURL.trim();
+		this.failRedirection = failRedirection;
 		return this;
 	}
 
@@ -371,7 +379,8 @@ public class TransactionSigner
 	 * @param idDocuments The ID documents to set.
 	 * @return The current object instance
 	 */
-	public TransactionSigner setIdDocuments(RegistrationRequest idDocuments)
+	public TransactionSigner setIdDocuments(
+			RegistrationRequest idDocuments)
 	{
 		this.idDocuments = idDocuments;
 		return this;
@@ -398,6 +407,75 @@ public class TransactionSigner
 			String validationSessionId)
 	{
 		this.validationSessionId = validationSessionId.trim();
+		return this;
+	}
+
+	/**
+	 * Returns the redirectPolicy value.
+	 *
+	 * @return redirectPolicy.
+	 */
+	public SignatureConstants.RedirectPolicy getRedirectPolicy()
+	{
+		return redirectPolicy;
+	}
+
+	/**
+	 * Sets the redirectPolicy value
+	 *
+	 * @param redirectPolicy The redirect policy.
+	 * @return The current object instance.
+	 */
+	public TransactionSigner setRedirectPolicy(
+			SignatureConstants.RedirectPolicy redirectPolicy)
+	{
+		this.redirectPolicy = redirectPolicy;
+		return this;
+	}
+
+	/**
+	 * Returns the redirect wait value.
+	 *
+	 * @return The redirectWait
+	 */
+	public int getRedirectWait()
+	{
+		return redirectWait;
+	}
+
+	/**
+	 * Sets the redirect wait value.
+	 *
+	 * @param redirectWait The redirectWait.
+	 * @return The current object instance.
+	 */
+	public TransactionSigner setRedirectWait(int redirectWait)
+	{
+		this.redirectWait = redirectWait;
+		return this;
+	}
+
+	/**
+	 * Returns <code>true</code> if the subscription agreements email
+	 * should be automatically sent to signer.
+	 *
+	 * @return The isAutoSendAgreements value.
+	 */
+	public boolean isAutoSendAgreements()
+	{
+		return autoSendAgreements;
+	}
+
+	/**
+	 * Sets the isAutoSendAgreements value.
+	 *
+	 * @param autoSendAgreements The isAutoSendAgreements value.
+	 * @return The current object instance.
+	 */
+	public TransactionSigner setAutoSendAgreements(
+			boolean autoSendAgreements)
+	{
+		this.autoSendAgreements = autoSendAgreements;
 		return this;
 	}
 }

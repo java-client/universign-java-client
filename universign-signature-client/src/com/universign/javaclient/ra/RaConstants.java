@@ -30,6 +30,23 @@ public class RaConstants
         {
             return url;
         }
+
+        /**
+         * Returns RaUrl from string value.
+         *
+         * @param url The Server Url as string.
+         * @return RaUrl enum.
+         */
+        public static RaUrl fromString(String url)
+        {
+            for (RaUrl raUrl : values()) {
+                if (raUrl.url.equals(url)) {
+                    return raUrl;
+                }
+            }
+            throw new IllegalArgumentException(
+                    "No URL with such value: " + url);
+        }
     }
 
     /**
@@ -52,6 +69,23 @@ public class RaConstants
         public int getType()
         {
             return type;
+        }
+
+        /**
+         * Returns IdDocumentTypes from int value.
+         *
+         * @param type The id document type as int.
+         * @return IdDocumentTypes enum
+         */
+        public static IdDocumentTypes fromInt(int type)
+        {
+            for (IdDocumentTypes t : values()) {
+                if (t.type == type) {
+                    return t;
+                }
+            }
+            throw new IllegalArgumentException(
+                    "No IdDocumentType with such value: " + type);
         }
     }
 }

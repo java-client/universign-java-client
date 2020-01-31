@@ -3,8 +3,8 @@ package com.universign.javaclient.users;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.universign.javaclient.utils.CustomDateDeserializer;
-import com.universign.javaclient.utils.CustomDateSerializer;
+import com.universign.javaclient.utils.JsonDateDeserializer;
+import com.universign.javaclient.utils.JsonDateSerializer;
 
 import java.util.Date;
 
@@ -19,11 +19,7 @@ public class PersonnalInfo extends UserDetails
 	private String language;
 	private String phoneNum;
 	private String landlineNum;
-	@JsonSerialize(using = CustomDateSerializer.class)
-	@JsonDeserialize(using = CustomDateDeserializer.class)
 	private Date creationDate;
-	@JsonSerialize(using = CustomDateSerializer.class)
-	@JsonDeserialize(using = CustomDateDeserializer.class)
 	private Date lastLogin;
 	private int operatorStatus;
 	private boolean admin;

@@ -1,14 +1,16 @@
 
 package com.universign.javaclient.utils;
 
-import java.util.Map;
-import java.io.*;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.util.StdDateFormat;
+import com.universign.javaclient.UniversignClientException;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Map;
 
 /**
  * Utility class.
@@ -34,9 +36,12 @@ public class Utils
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.disable(SerializationFeature
 				.WRITE_DATES_AS_TIMESTAMPS);
-		objectMapper.setDateFormat(new StdDateFormat());
+		objectMapper.configure(DeserializationFeature
+				.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		objectMapper.setSerializationInclusion(
 				JsonInclude.Include.NON_NULL);
+		objectMapper.setSerializationInclusion(
+				JsonInclude.Include.NON_EMPTY);
 		return objectMapper.convertValue(
 				object, Map.class);
 	}
@@ -50,39 +55,46 @@ public class Utils
 	 * @return The transformed Map.
 	 */
 	public static <T> T mapToObject(Map<String, Object> map,
-			Class<T> objectClass)
+									Class<T> objectClass)
 	{
 		ObjectMapper objectMapper = new ObjectMapper();
 		//To ignore properties that are not declared
 		objectMapper.configure(DeserializationFeature
 				.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		objectMapper.setSerializationInclusion(
+				JsonInclude.Include.NON_NULL);
+		objectMapper.setSerializationInclusion(
+				JsonInclude.Include.NON_EMPTY);
 		return objectMapper.convertValue(map, objectClass);
 	}
 
 	/**
-	 * Defines the read document content as a byte array.
+	 * Read document content as a byte array.
 	 *
 	 * @param path the path of document to sign.
 	 * @return bytesArray.
 	 */
 	public static byte[] loadDoc(String path)
+			throws UniversignClientException
 	{
 		FileInputStream fileInputStream = null;
 		byte[] bytesArray = null;
 		try {
 			File file = new File(path);
-			bytesArray = new byte[(int) file.length()];
+			bytesArray = new byte[(int)file.length()];
 			//read file into bytes[]
 			fileInputStream = new FileInputStream(file);
 			fileInputStream.read(bytesArray);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new UniversignClientException(
+					"Failed to load document content", e);
 		} finally {
 			if (fileInputStream != null) {
 				try {
 					fileInputStream.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					throw new UniversignClientException(
+							"Error while closing fileInputStream", e);
 				}
 			}
 		}

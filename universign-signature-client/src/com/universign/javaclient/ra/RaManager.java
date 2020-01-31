@@ -43,9 +43,9 @@ public final class RaManager
 	 * @return RaManager instance.
      * @throws UniversignClientException Universign Exception.
      */
-    public static RaManager create(String login, String password,
-                                   RaUrl url, int connectTimeout,
-                                   int readTimeout)
+	public static RaManager create(String login, String password,
+								   RaUrl url, int connectTimeout,
+								   int readTimeout)
 			throws UniversignClientException
 	{
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
@@ -65,36 +65,36 @@ public final class RaManager
 		}
 	}
 
-    /**
-     * A factory method.
+	/**
+	 * A factory method.
 	 * To instantiate the RaManager.
-     *
-     * @param login The user email address.
-     * @param password The user password.
+	 *
+	 * @param login The user email address.
+	 * @param password The user password.
 	 * @return RaManager instance.
-     * @throws UniversignClientException Universign Exception.
-     */
-    public static RaManager create(String login, String password)
-            throws UniversignClientException
-    {
-        return create(login, password, RaUrl.PROD_URL, 3000, 5000);
-    }
+	 * @throws UniversignClientException Universign Exception.
+	 */
+	public static RaManager create(String login, String password)
+			throws UniversignClientException
+	{
+		return create(login, password, RaUrl.PROD_URL, 5000, 5000);
+	}
 
-    /**
-     * A factory method.
+	/**
+	 * A factory method.
 	 * To instantiate the SignatureManager.
-     *
-     * @param login The user email address.
-     * @param password The user password.
-     * @param url The server URL connection.
+	 *
+	 * @param login The user email address.
+	 * @param password The user password.
+	 * @param url The server URL connection.
 	 * @return RaManager instance.
-     * @throws UniversignClientException Universign Exception.
-     */
-    public static RaManager create(String login, String password, RaUrl url)
-            throws UniversignClientException
-    {
-        return create(login, password, url, 3000, 5000);
-    }
+	 * @throws UniversignClientException Universign Exception.
+	 */
+	public static RaManager create(String login, String password, RaUrl url)
+			throws UniversignClientException
+	{
+		return create(login, password, url, 5000, 5000);
+	}
 
 	/**
 	 * Describes the checkOperatorStatus web service call.
@@ -136,19 +136,19 @@ public final class RaManager
 			MatchingResult[] result =
 					new MatchingResult[res.length];
 			for (int i = 0; i < res.length; i++) {
-			Map<String, Object> map = (Map<String, Object>)res[i];
-			result[i] = UninstantiatedBeansFactory
-			.createMatchingResult((String)map.get("lastname"),
-					(String)map.get("firstname"),
-					(String)map.get("mobile"),
-					(String)map.get("email"),
-					(String)map.get("certificateLevel"));
+				Map<String, Object> map = (Map<String, Object>)res[i];
+				result[i] = UninstantiatedBeansFactory
+						.createMatchingResult((String)map.get("lastname"),
+								(String)map.get("firstname"),
+								(String)map.get("mobile"),
+								(String)map.get("email"),
+								(String)map.get("certificateLevel"));
 			}
 			return result;
 		} catch (XmlRpcException e) {
 			throw new UniversignClientException(
 					"Invalid Request", e);
-			}
+		}
 	}
 
 	/**
@@ -214,10 +214,10 @@ public final class RaManager
 	 * @return The validation Result.
 	 * @throws UniversignClientException Universign Exception.
 	 */
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	public ValidatorResult validate(ValidationRequest
-			validationRequest)
-					throws UniversignClientException
+											validationRequest)
+			throws UniversignClientException
 	{
 		Map<String, Object> requestMap = Utils.objectToMap(
 				validationRequest);
@@ -226,12 +226,12 @@ public final class RaManager
 					.execute("validator.validate",
 							new Object[] {requestMap});
 			return UninstantiatedBeansFactory
-				.createValidatorResult((String)res.get("id"),
-						(Integer)res.get("status"),
-						(Integer)res.get("reason"),
-						(String)res.get("reason"
-								+ "Message"),
-						(Map<String, Object>)res.get("result"));
+					.createValidatorResult((String)res.get("id"),
+							(Integer)res.get("status"),
+							(Integer)res.get("reason"),
+							(String)res.get("reason"
+									+ "Message"),
+							(Map<String, Object>)res.get("result"));
 		} catch (XmlRpcException e) {
 			throw new UniversignClientException(
 					"Invalid Request", e);

@@ -12,13 +12,13 @@ import java.util.Date;
  * Describes the custom Jackson library Date serializer
  *
  */
-public class CustomDateSerializer extends StdSerializer<Date>
+public class JsonDateSerializer extends StdSerializer<Date>
 {
 
     /**
-     * The default CustomDateSerializer constructor
+     * The default JsonDateSerializer constructor
      */
-    public CustomDateSerializer()
+    public JsonDateSerializer()
     {
         super(Date.class);
     }

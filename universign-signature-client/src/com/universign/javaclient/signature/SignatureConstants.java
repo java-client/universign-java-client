@@ -30,6 +30,23 @@ public class SignatureConstants
 		{
 			return url;
 		}
+
+		/**
+		 * Returns SignatureUrl from string value.
+		 *
+		 * @param url The Server Url as string.
+		 * @return SignatureUrl enum.
+		 */
+		public static SignatureUrl fromString(String url)
+		{
+			for (SignatureUrl sUrl : values()) {
+				if (sUrl.url.equals(url)) {
+					return sUrl;
+				}
+			}
+			throw new IllegalArgumentException(
+					"No URL with such value: " + url);
+		}
 	}
 
 	/**
@@ -61,6 +78,23 @@ public class SignatureConstants
 		{
 			return langue;
 		}
+
+		/**
+		 * Returns Language from string value.
+		 *
+		 * @param language The language as string.
+		 * @return Language enum.
+		 */
+		public static Language fromString(String language)
+		{
+			for (Language l : values()) {
+				if (l.langue.equals(language)) {
+					return l;
+				}
+			}
+			throw new IllegalArgumentException(
+					"No language with such value: " + language);
+		}
 	}
 
 	/**
@@ -71,6 +105,7 @@ public class SignatureConstants
 		ID_TYPE_ID_CARD_FR("id_card_fr"),
 		ID_TYPE_PASSPORT_EU("passport_eu"),
 		ID_TYPE_TITRE_SEJOUR("titre_sejour");
+		/*ID_TYPE_DRIVE_LICENCE("drive_licence");*/
 
 		private String type;
 
@@ -83,6 +118,23 @@ public class SignatureConstants
 		public String getType()
 		{
 			return type;
+		}
+
+		/**
+		 * Returns IdDocumentTypes from string value.
+		 *
+		 * @param type The id document type as string.
+		 * @return IdDocumentTypes enum.
+		 */
+		public static IdDocumentTypes fromString(String type)
+		{
+			for (IdDocumentTypes t : values()) {
+				if (t.type.equals(type)) {
+					return t;
+				}
+			}
+			throw new IllegalArgumentException(
+					"No IdDocumentType with such value: " + type);
 		}
 	}
 
@@ -107,6 +159,23 @@ public class SignatureConstants
 		{
 			return format;
 		}
+
+		/**
+		 * Returns SignatureFormats from string value.
+		 *
+		 * @param format The signature format as string.
+		 * @return SignatureFormats enum.
+		 */
+		public static SignatureFormats fromString(String format)
+		{
+			for (SignatureFormats f : values()) {
+				if (f.format.equals(format)) {
+					return f;
+				}
+			}
+			throw new IllegalArgumentException(
+					"No SignatureFormat with such value: " + format);
+		}
 	}
 
 	/**
@@ -130,6 +199,23 @@ public class SignatureConstants
 		public String getDocType()
 		{
 			return docType;
+		}
+
+		/**
+		 * Returns DocumentTypes from string value.
+		 *
+		 * @param type The document type as string.
+		 * @return DocumentTypes enum.
+		 */
+		public static DocumentTypes fromString(String type)
+		{
+			for (DocumentTypes t : values()) {
+				if (t.docType.equals(type)) {
+					return t;
+				}
+			}
+			throw new IllegalArgumentException(
+					"No DocumentType with such value: " + type);
 		}
 	}
 
@@ -157,6 +243,23 @@ public class SignatureConstants
 		{
 			return status;
 		}
+
+		/**
+		 * Returns TransactionStatus from int value.
+		 *
+		 * @param status The transaction status as int.
+		 * @return TransactionStatus enum.
+		 */
+		public static TransactionStatus fromInt(int status)
+		{
+			for (TransactionStatus s : values()) {
+				if (s.status == status) {
+					return s;
+				}
+			}
+			throw new IllegalArgumentException(
+					"No TransactionStatus with such value: " + status);
+		}
 	}
 
 	/**
@@ -164,6 +267,7 @@ public class SignatureConstants
 	 */
 	public enum CertificateType
 	{
+		/*CERTIFICATE_TYPE_LOCAL("local"),*/
 		CERTIFICATE_TYPE_CERTIFIED("certified"),
 		CERTIFICATE_TYPE_ADVANCED("advanced"),
 		CERTIFICATE_TYPE_SIMPLE("simple");
@@ -179,6 +283,23 @@ public class SignatureConstants
 		public String getCertType()
 		{
 			return certType;
+		}
+
+		/**
+		 * Returns CertificateType from string value.
+		 *
+		 * @param type The certificate type as string.
+		 * @return CertificateType enum.
+		 */
+		public static CertificateType formString(String type)
+		{
+			for (CertificateType t : values()) {
+				if (t.certType.equals(type)) {
+					return t;
+				}
+			}
+			throw new IllegalArgumentException(
+					"No CertificateType with such value: " + type);
 		}
 	}
 
@@ -203,6 +324,23 @@ public class SignatureConstants
 		{
 			return mode;
 		}
+
+		/**
+		 * Returns HandwrittenMode from int value.
+		 *
+		 * @param mode The handwritten mode as int.
+		 * @return HandwrittenMode enum.
+		 */
+		public static HandwrittenMode fromInt(int mode)
+		{
+			for (HandwrittenMode m : values()) {
+				if (m.mode == mode) {
+					return m;
+				}
+			}
+			throw new IllegalArgumentException(
+					"No HandwrittenMode with such value: " + mode);
+		}
 	}
 
 	/**
@@ -226,6 +364,23 @@ public class SignatureConstants
 		{
 			return mode;
 		}
+
+		/**
+		 * Returns ChaningMode from string value.
+		 *
+		 * @param mode the chaningMode as string.
+		 * @return ChaningMode enum.
+		 */
+		public static ChaningMode fromString(String mode)
+		{
+			for (ChaningMode m : values()) {
+				if (m.mode.equals(mode)) {
+					return m;
+				}
+			}
+			throw new IllegalArgumentException(
+					"No ChainingMode with such value: " + mode);
+		}
 	}
 
 	/**
@@ -247,6 +402,62 @@ public class SignatureConstants
 		public String getRole()
 		{
 			return part;
+		}
+
+		/**
+		 * Returns Role form string value.
+		 *
+		 * @param role The role as string.
+		 * @return Role enum.
+		 */
+		public static Role fromString(String role)
+		{
+			for (Role r : values()) {
+				if (r.part.equals(role)) {
+					return r;
+				}
+			}
+			throw new IllegalArgumentException(
+					"No Role with such value: " + role);
+		}
+	}
+
+	/**
+	 * RedirectPolicy that can be used.
+	 */
+	public enum RedirectPolicy
+	{
+		DASHBOARD("dashboard"),
+		QUICK("quick");
+
+		private String policy;
+
+		private RedirectPolicy(String policy)
+		{
+			this.policy = policy;
+		}
+
+		@JsonValue
+		public String getRedirectPolicy()
+		{
+			return policy;
+		}
+
+		/**
+		 * Returns RedirectPolicy from string value.
+		 *
+		 * @param policy The redirect policy as string.
+		 * @return RedirectPolicy enum.
+		 */
+		public static RedirectPolicy fromString(String policy)
+		{
+			for (RedirectPolicy redirectPolicy : values()) {
+				if (redirectPolicy.policy.equals(policy)) {
+					return redirectPolicy;
+				}
+			}
+			throw new IllegalArgumentException(
+					"No RedirectPolicy with such value: " + policy);
 		}
 	}
 }

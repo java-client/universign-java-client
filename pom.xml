@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.universign.client</groupId>
-    <artifactId>javaclient-parent</artifactId>
+    <groupId>com.universign.gitclient</groupId>
+    <artifactId>git-javaclient-parent</artifactId>
     <packaging>pom</packaging>
-    <name>Universign Client</name>
+    <name>Universign Git Client</name>
     <version>1.0-SNAPSHOT</version>
     <inceptionYear>2019</inceptionYear>
 

@@ -1,12 +1,15 @@
 
 package com.universign.javaclient.signature;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 
 /**
- * Contains informations and options for a signature transaction creation.
+ * Contains information and options for a signature transaction creation.
  *
  */
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class TransactionRequest
 {
 	private String profile;
@@ -24,6 +27,12 @@ public class TransactionRequest
 	private SignatureConstants.ChaningMode chainingMode;
 	private List<String> finalDocCCeMails;
 	private boolean towStepsRegistration;
+	private RedirectionConfig autoValidationRedirection;
+	private SignatureConstants.RedirectPolicy redirectPolicy;
+	private int redirectWait;
+	private boolean autoSendAgreements;
+	private String operator;
+	private String registrationCallbackURL;
 
 	/**
 	 * Returns the name of the signature profile to use.
@@ -39,7 +48,7 @@ public class TransactionRequest
 	 * Sets the name of the signature profile to use.
 	 *
 	 * @param profile The profile name.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setProfile(String profile)
 	{
@@ -62,7 +71,7 @@ public class TransactionRequest
 	 * Sets the unique id used by the requester to identify the transaction.
 	 *
 	 * @param customId The custom Id to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setCustomId(String customId)
 	{
@@ -85,13 +94,13 @@ public class TransactionRequest
 	 * Must have at least one element.
 	 *
 	 * @param signers The list of signer to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setSigners(
-	        List<TransactionSigner> signers)
+			List<TransactionSigner> signers)
 	{
 		this.signers = signers;
-        return this;
+		return this;
 	}
 
 	/**
@@ -110,13 +119,13 @@ public class TransactionRequest
 	 * Size limit for each document is 10Mo.
 	 *
 	 * @param documents The document list to be signed.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setDocuments(
-	        List<TransactionDocument> documents)
+			List<TransactionDocument> documents)
 	{
 		this.documents = documents;
-        return this;
+		return this;
 	}
 
 	/**
@@ -138,13 +147,13 @@ public class TransactionRequest
 	 *
 	 * @param mustContactFirstSigner The parameter to set
 	 * if the invitation mail will be sent to the first signer.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setMustContactFirstSigner(
-	        boolean mustContactFirstSigner)
+			boolean mustContactFirstSigner)
 	{
 		this.mustContactFirstSigner = mustContactFirstSigner;
-        return this;
+		return this;
 	}
 
 	/**
@@ -165,12 +174,12 @@ public class TransactionRequest
 	 *
 	 * @param finalDocSent The parameter to set if the signer
 	 * will receive the signed document.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setFinalDocSent(boolean finalDocSent)
 	{
 		this.finalDocSent = finalDocSent;
-        return this;
+		return this;
 	}
 
 	/**
@@ -191,13 +200,13 @@ public class TransactionRequest
 	 *
 	 * @param finalDocRequesterSent The parameter to set if the requester
 	 * will receive the signed document.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setFinalDocRequesterSent(
-	        boolean finalDocRequesterSent)
+			boolean finalDocRequesterSent)
 	{
 		this.finalDocRequesterSent = finalDocRequesterSent;
-        return this;
+		return this;
 	}
 
 	/**
@@ -218,13 +227,13 @@ public class TransactionRequest
 	 *
 	 * @param finalDocObserverSent The parameter to set
 	 * if the observer will receive the signed document.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setFinalDocObserverSent(
-	        boolean finalDocObserverSent)
+			boolean finalDocObserverSent)
 	{
 		this.finalDocObserverSent = finalDocObserverSent;
-        return this;
+		return this;
 	}
 
 	/**
@@ -241,12 +250,12 @@ public class TransactionRequest
 	 * Sets the description or title of the signature.
 	 *
 	 * @param description The signature description to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setDescription(String description)
 	{
 		this.description = description.trim();
-        return this;
+		return this;
 	}
 
 	/**
@@ -273,13 +282,13 @@ public class TransactionRequest
 	 * <code>simple</code> to allow signer to perform a simple signature.
 	 *
 	 * @param certificateType The type of the certificate to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setCertificateType(
-	        SignatureConstants.CertificateType certificateType)
+			SignatureConstants.CertificateType certificateType)
 	{
 		this.certificateType = certificateType;
-        return this;
+		return this;
 	}
 
 	/**
@@ -297,13 +306,13 @@ public class TransactionRequest
 	 * The default value is <code>en</code>.
 	 *
 	 * @param language The transaction language to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setLanguage(
-	        SignatureConstants.Language language)
+			SignatureConstants.Language language)
 	{
 		this.language = language;
-        return this;
+		return this;
 	}
 
 	/**
@@ -311,7 +320,8 @@ public class TransactionRequest
 	 *
 	 * @return The activated mode of handWritten signature.
 	 */
-	public SignatureConstants.HandwrittenMode getHandWrittenSignatureMode()
+	public SignatureConstants
+			.HandwrittenMode getHandWrittenSignatureMode()
 	{
 		return handWrittenSignatureMode;
 	}
@@ -325,13 +335,14 @@ public class TransactionRequest
 	 * a touch interface.
 	 *
 	 * @param handWrittenSignatureMode The mode to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setHandWrittenSignatureMode(
-			SignatureConstants.HandwrittenMode handWrittenSignatureMode)
+			SignatureConstants
+					.HandwrittenMode handWrittenSignatureMode)
 	{
 		this.handWrittenSignatureMode = handWrittenSignatureMode;
-        return this;
+		return this;
 	}
 
 	/**
@@ -355,13 +366,13 @@ public class TransactionRequest
 	 * in this mode, all signers must be physically in the same place.
 	 *
 	 * @param chainingMode The chaining mode to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setChainingMode(
-	        SignatureConstants.ChaningMode chainingMode)
+			SignatureConstants.ChaningMode chainingMode)
 	{
 		this.chainingMode = chainingMode;
-        return this;
+		return this;
 	}
 
 	/**
@@ -380,13 +391,13 @@ public class TransactionRequest
 	 * signed document.
 	 *
 	 * @param finalDocCCeMails The addresses list to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setFinalDocCCeMails(
-	        List<String> finalDocCCeMails)
+			List<String> finalDocCCeMails)
 	{
 		this.finalDocCCeMails = finalDocCCeMails;
-        return this;
+		return this;
 	}
 
 	/**
@@ -409,12 +420,149 @@ public class TransactionRequest
 	 *
 	 * @param towStepsRegistration The parameter to set
 	 * for the two steps registration mode.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionRequest setTowStepsRegistration(
-	        boolean towStepsRegistration)
+			boolean towStepsRegistration)
 	{
 		this.towStepsRegistration = towStepsRegistration;
-        return this;
+		return this;
+	}
+
+	/**
+	 * Returns The redirection config.
+	 *
+	 * @return The redirection Config.
+	 */
+	public RedirectionConfig getAutoValidationRedirection()
+	{
+		return autoValidationRedirection;
+	}
+
+	/**
+	 * Sets The redirection config.
+	 *
+	 * @param autoValidationRedirection The redirection config.
+	 * @return The current object instance.
+	 */
+	public TransactionRequest setAutoValidationRedirection(
+			RedirectionConfig autoValidationRedirection)
+	{
+		this.autoValidationRedirection = autoValidationRedirection;
+		return this;
+	}
+
+	/**
+	 * Returns the redirectPolicy value.
+	 *
+	 * @return redirectPolicy.
+	 */
+	public SignatureConstants.RedirectPolicy getRedirectPolicy()
+	{
+		return redirectPolicy;
+	}
+
+	/**
+	 * Sets the redirectPolicy value
+	 *
+	 * @param redirectPolicy The redirect policy.
+	 * @return The current object instance.
+	 */
+	public TransactionRequest setRedirectPolicy(
+			SignatureConstants.RedirectPolicy redirectPolicy)
+	{
+		this.redirectPolicy = redirectPolicy;
+		return this;
+	}
+
+	/**
+	 * Returns the redirect wait value.
+	 *
+	 * @return The redirectWait
+	 */
+	public int getRedirectWait()
+	{
+		return redirectWait;
+	}
+
+	/**
+	 * Sets the redirect wait value.
+	 *
+	 * @param redirectWait The redirectWait.
+	 * @return The current object instance.
+	 */
+	public TransactionRequest setRedirectWait(int redirectWait)
+	{
+		this.redirectWait = redirectWait;
+		return this;
+	}
+
+	/**
+	 * Returns <code>true</code> if the subscription agreements email
+	 * should be automatically sent to signer.
+	 *
+	 * @return The isAutoSendAgreements value.
+	 */
+	public boolean isAutoSendAgreements()
+	{
+		return autoSendAgreements;
+	}
+
+	/**
+	 * Sets the isAutoSendAgreements value.
+	 *
+	 * @param autoSendAgreements The isAutoSendAgreements value.
+	 * @return The current object instance.
+	 */
+	public TransactionRequest setAutoSendAgreements(
+			boolean autoSendAgreements)
+	{
+		this.autoSendAgreements = autoSendAgreements;
+		return this;
+	}
+
+	/**
+	 * Returns The operator email.
+	 *
+	 * @return The operator email.
+	 */
+	public String getOperator()
+	{
+		return operator;
+	}
+
+	/**
+	 * Sets the operator email.
+	 *
+	 * @param operator The operator email.
+	 * @return The current object instance.
+	 */
+	public TransactionRequest setOperator(String operator)
+	{
+		this.operator = operator.trim();
+		return this;
+	}
+
+	/**
+	 * Returns the registration callback Url.
+	 *
+	 * @return The registration callback Url.
+	 */
+	public String getRegistrationCallbackURL()
+	{
+		return registrationCallbackURL;
+	}
+
+	/**
+	 * Sets the registration callback Url.
+	 *
+	 * @param registrationCallbackURL The registration callback Url.
+	 * @return The current object instance.
+	 */
+	public TransactionRequest setRegistrationCallbackURL(
+			String registrationCallbackURL)
+	{
+		this.registrationCallbackURL = registrationCallbackURL.trim();
+		return this;
 	}
 }

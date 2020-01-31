@@ -27,5 +27,22 @@ public class UsersConstants
         {
             return url;
         }
+
+        /**
+         * Returns UsersUrl from string value.
+         *
+         * @param url The Server Url as string.
+         * @return UsersUrl enum.
+         */
+        public static UsersUrl fromString(String url)
+        {
+            for (UsersUrl u : values()) {
+                if (u.url.equals(url)) {
+                    return u;
+                }
+            }
+            throw new IllegalArgumentException(
+                    "No URL with such value: " + url);
+        }
     }
 }

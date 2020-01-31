@@ -3,8 +3,8 @@ package com.universign.javaclient.signature;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.universign.javaclient.utils.CustomDateDeserializer;
-import com.universign.javaclient.utils.CustomDateSerializer;
+import com.universign.javaclient.utils.JsonDateDeserializer;
+import com.universign.javaclient.utils.JsonDateSerializer;
 
 import java.util.Date;
 import java.util.List;
@@ -19,14 +19,14 @@ public class TransactionInfo
 	private String status;
 	private List<SignerInfo> signerInfos;
 	private int currentSigner;
-	@JsonSerialize(using = CustomDateSerializer.class)
-	@JsonDeserialize(using = CustomDateDeserializer.class)
 	private Date creationDate;
 	private String description;
 	private InitiatorInfo initiatorInfo;
 	private boolean eachField;
 	private String customId;
 	private String transactionId;
+	private SignatureConstants.RedirectPolicy redirectPolicy;
+	private int redirectWait;
 
 	/**
 	 * The TransactionInfo Constructor.
@@ -50,12 +50,12 @@ public class TransactionInfo
 	 * Sets the transaction status.
 	 *
 	 * @param status The transaction status to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionInfo setStatus(String status)
 	{
 		this.status = status;
-        return this;
+		return this;
 	}
 
 	/**
@@ -72,12 +72,12 @@ public class TransactionInfo
 	 * Sets the information about signer.
 	 *
 	 * @param signerInfos The information to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionInfo setSignerInfos(List<SignerInfo> signerInfos)
 	{
 		this.signerInfos = signerInfos;
-        return this;
+		return this;
 	}
 
 	/**
@@ -94,12 +94,12 @@ public class TransactionInfo
 	 * Sets the index of the current signer.
 	 *
 	 * @param currentSigner The signer index to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionInfo setCurrentSigner(int currentSigner)
 	{
 		this.currentSigner = currentSigner;
-        return this;
+		return this;
 	}
 
 	/**
@@ -116,12 +116,12 @@ public class TransactionInfo
 	 * Sets the date of creation of transaction.
 	 *
 	 * @param creationDate The date of creation to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionInfo setCreationDate(Date creationDate)
 	{
 		this.creationDate = creationDate;
-        return this;
+		return this;
 	}
 
 	/**
@@ -138,12 +138,12 @@ public class TransactionInfo
 	 * Sets the transaction description.
 	 *
 	 * @param description The transaction description to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionInfo setDescription(String description)
 	{
 		this.description = description;
-        return this;
+		return this;
 	}
 
 	/**
@@ -160,12 +160,12 @@ public class TransactionInfo
 	 * Sets the requester information.
 	 *
 	 * @param initiatorInfo The requester information to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionInfo setInitiatorInfo(InitiatorInfo initiatorInfo)
 	{
 		this.initiatorInfo = initiatorInfo;
-        return this;
+		return this;
 	}
 
 	/**
@@ -185,12 +185,12 @@ public class TransactionInfo
 	 *
 	 * @param eachField The eachField to set for transaction
 	 * with handwritten signature.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionInfo setEachField(boolean eachField)
 	{
 		this.eachField = eachField;
-        return this;
+		return this;
 	}
 
 	/**
@@ -207,12 +207,12 @@ public class TransactionInfo
 	 * Sets the Id to identify transaction by requester.
 	 *
 	 * @param customId The custom Id to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionInfo setCustomId(String customId)
 	{
 		this.customId = customId;
-        return this;
+		return this;
 	}
 
 	/**
@@ -229,11 +229,56 @@ public class TransactionInfo
 	 * Sets the Universign transactionId.
 	 *
 	 * @param transactionId The Id to set.
-     * @return The current object instance
+	 * @return The current object instance
 	 */
 	public TransactionInfo setTransactionId(String transactionId)
 	{
 		this.transactionId = transactionId;
-        return this;
+		return this;
+	}
+
+	/**
+	 * Returns the redirectPolicy value.
+	 *
+	 * @return redirectPolicy.
+	 */
+	public SignatureConstants.RedirectPolicy getRedirectPolicy()
+	{
+		return redirectPolicy;
+	}
+
+	/**
+	 * Sets the redirectPolicy value
+	 *
+	 * @param redirectPolicy The redirect policy.
+	 * @return The current object instance.
+	 */
+	public TransactionInfo setRedirectPolicy(
+			SignatureConstants.RedirectPolicy redirectPolicy)
+	{
+		this.redirectPolicy = redirectPolicy;
+		return this;
+	}
+
+	/**
+	 * Returns the redirect wait value.
+	 *
+	 * @return The redirectWait
+	 */
+	public int getRedirectWait()
+	{
+		return redirectWait;
+	}
+
+	/**
+	 * Sets the redirect wait value.
+	 *
+	 * @param redirectWait The redirectWait.
+	 * @return The current object instance.
+	 */
+	public TransactionInfo setRedirectWait(int redirectWait)
+	{
+		this.redirectWait = redirectWait;
+		return this;
 	}
 }

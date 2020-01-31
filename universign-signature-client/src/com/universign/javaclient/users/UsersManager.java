@@ -45,23 +45,23 @@ public final class UsersManager
 	 * @throws UniversignClientException Universign Exception.
 	 */
 	public static UsersManager create(String login, String password,
-						UsersUrl url, int connectTimeout,
-						int readTimeout)
-            throws UniversignClientException
+									  UsersUrl url, int connectTimeout,
+									  int readTimeout)
+			throws UniversignClientException
 	{
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 		try {
 			config.setConnectionTimeout(connectTimeout);
 			config.setReplyTimeout(readTimeout);
 			config.setServerURL(new URL(url.getUrl()));
-            config.setBasicUserName(login);
-            config.setBasicPassword(password);
-            XmlRpcClient client = new XmlRpcClient();
-            client.setConfig(config);
-            return new UsersManager(client);
+			config.setBasicUserName(login);
+			config.setBasicPassword(password);
+			XmlRpcClient client = new XmlRpcClient();
+			client.setConfig(config);
+			return new UsersManager(client);
 		} catch (MalformedURLException e) {
-            throw new UniversignClientException(
-                    "Connection Error", e);
+			throw new UniversignClientException(
+					"Connection Error", e);
 		}
 	}
 
@@ -77,7 +77,7 @@ public final class UsersManager
 	public static UsersManager create(String login, String password)
 			throws UniversignClientException
 	{
-		return create(login, password, UsersUrl.PROD_URL, 2000, 5000);
+		return create(login, password, UsersUrl.PROD_URL, 5000, 5000);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public final class UsersManager
 	public static UsersManager create(String login, String password, UsersUrl url)
 			throws UniversignClientException
 	{
-		return create(login, password, url, 2000, 5000);
+		return create(login, password, url, 5000, 5000);
 	}
 
 	/**
@@ -168,11 +168,11 @@ public final class UsersManager
 						(Map<String, Object>)result[i];
 				list[i] = UninstantiatedBeansFactory
 						.createUserDetails(
-						(String)map.get("email"),
-						(String)map.get("firstname"),
-						(String)map.get("lastname"),
-						(Integer)map.get("status"));
-				}
+								(String)map.get("email"),
+								(String)map.get("firstname"),
+								(String)map.get("lastname"),
+								(Integer)map.get("status"));
+			}
 			return list;
 		} catch (XmlRpcException e) {
 			throw new UniversignClientException(

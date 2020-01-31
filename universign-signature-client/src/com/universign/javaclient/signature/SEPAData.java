@@ -1,10 +1,13 @@
 
 package com.universign.javaclient.signature;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * Contains information needed to create a SEPA mandate PDF.
  *
  */
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class SEPAData
 {
 	private String rum;

@@ -1,10 +1,11 @@
 
 package com.universign.javaclient.signature;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.universign.javaclient.utils.CustomDateDeserializer;
-import com.universign.javaclient.utils.CustomDateSerializer;
+import com.universign.javaclient.utils.JsonDateDeserializer;
+import com.universign.javaclient.utils.JsonDateSerializer;
 
 import java.util.Date;
 
@@ -13,6 +14,7 @@ import java.util.Date;
  * Used as a return value only.
  *
  */
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class SignerInfo
 {
 	private String status;
@@ -22,10 +24,11 @@ public class SignerInfo
 	private String email;
 	private String firstname;
 	private String lastname;
-	@JsonSerialize(using = CustomDateSerializer.class)
-	@JsonDeserialize(using = CustomDateDeserializer.class)
 	private Date actionDate;
 	private int[] refusedDocs;
+	private String refusalComment;
+	private SignatureConstants.RedirectPolicy redirectPolicy;
+	private int redirectWait;
 
 	/**
 	 * The SignerInfo Constructor.
@@ -250,6 +253,73 @@ public class SignerInfo
 	public SignerInfo setRefusedDocs(int[] refusedDocs)
 	{
 		this.refusedDocs = refusedDocs;
+		return this;
+	}
+
+	/**
+	 * Returns the refusal comment.
+	 *
+	 * @return The refusalComment.
+	 */
+	public String getRefusalComment()
+	{
+		return refusalComment;
+	}
+
+	/**
+	 * Sets the refusal comment.
+	 *
+	 * @param refusalComment The refusal comment.
+	 * @return The current object instance.
+	 */
+	public SignerInfo setRefusalComment(String refusalComment)
+	{
+		this.refusalComment = refusalComment;
+		return this;
+	}
+
+	/**
+	 * Returns the redirectPolicy value.
+	 *
+	 * @return redirectPolicy.
+	 */
+	public SignatureConstants.RedirectPolicy getRedirectPolicy()
+	{
+		return redirectPolicy;
+	}
+
+	/**
+	 * Sets the redirectPolicy value
+	 *
+	 * @param redirectPolicy The redirect policy.
+	 * @return The current object instance.
+	 */
+	public SignerInfo setRedirectPolicy(
+			SignatureConstants.RedirectPolicy redirectPolicy)
+	{
+		this.redirectPolicy = redirectPolicy;
+		return this;
+	}
+
+	/**
+	 * Returns the redirect wait value.
+	 *
+	 * @return The redirectWait
+	 */
+	public int getRedirectWait()
+	{
+		return redirectWait;
+	}
+
+	/**
+	 * Sets the redirect wait value.
+	 *
+	 * @param redirectWait The redirectWait.
+	 * @return The current object instance.
+	 */
+	public SignerInfo setRedirectWait(int redirectWait)
+	{
+		this.redirectWait = redirectWait;
 		return this;
 	}
 }
