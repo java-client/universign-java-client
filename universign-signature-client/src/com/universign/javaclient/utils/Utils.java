@@ -15,7 +15,6 @@ import java.util.Map;
 /**
  * Utility class.
  * Converts JavaBeans To Map and vice versa methods.
- *
  */
 public class Utils
 {
