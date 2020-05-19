@@ -13,6 +13,8 @@ public class MatchingResult
 	private String mobile;
 	private String email;
 	private String certificateLevel;
+	private String certificateStatus;
+	private CertificateInfo certificateInfo;
 
 	/**
 	 * The MatchingResult constructor.
@@ -129,6 +131,50 @@ public class MatchingResult
 	public MatchingResult setCertificateLevel(String certificateLevel)
 	{
 		this.certificateLevel = certificateLevel;
+		return this;
+	}
+
+	/**
+	 * Returns the certificate status
+	 *
+	 * @return certificateStatus
+	 */
+	public String getCertificateStatus()
+	{
+		return certificateStatus;
+	}
+
+	/**
+	 * Sets the certificate status
+	 *
+	 * @param certificateStatus to set
+	 * @return MatchingResult instance
+	 */
+	public MatchingResult setCertificateStatus(String certificateStatus)
+	{
+		this.certificateStatus = certificateStatus;
+		return this;
+	}
+
+	/**
+	 * Returns the certificate info
+	 *
+	 * @return certificateInfo
+	 */
+	public CertificateInfo getCertificateInfo()
+	{
+		return certificateInfo;
+	}
+
+	/**
+	 * Sets the certificate info
+	 *
+	 * @param certificateInfo to set
+	 * @return MatchingResult instance
+	 */
+	public MatchingResult setCertificateInfo(CertificateInfo certificateInfo)
+	{
+		this.certificateInfo = certificateInfo;
 		return this;
 	}
 }

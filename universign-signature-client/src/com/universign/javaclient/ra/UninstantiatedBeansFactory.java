@@ -14,6 +14,16 @@ final class UninstantiatedBeansFactory
 		// Private constructor
 	}
 
+	static CertificateInfo createCertificateInfo(
+			String subjectDN, String serialNumber, byte[][] chain)
+	{
+		CertificateInfo certificateInfo = new CertificateInfo();
+		return certificateInfo
+				.setSubjectDN(subjectDN)
+				.setSerialNumber(serialNumber)
+				.setChain(chain);
+	}
+
 	/**
 	 * Creates and sets the MatchingResult object.
 	 *
@@ -27,15 +37,16 @@ final class UninstantiatedBeansFactory
 	 */
 	static MatchingResult createMatchingResult(String lastname,
 			String firstname, String mobile, String email,
-			String certificateLevel)
+			String certificateLevel, String certificateStatus,
+			CertificateInfo certificateInfo)
 	{
-		MatchingResult matchResult = new MatchingResult();
-		matchResult.setLastname(lastname)
+		return new MatchingResult().setLastname(lastname)
 				.setFirstname(firstname)
 				.setMobile(mobile)
 				.setEmail(email)
-				.setCertificateLevel(certificateLevel);
-		return matchResult;
+				.setCertificateLevel(certificateLevel)
+				.setCertificateStatus(certificateStatus)
+				.setCertificateInfo(certificateInfo);
 	}
 
 	/**

@@ -142,7 +142,12 @@ public final class RaManager
 								(String)map.get("firstname"),
 								(String)map.get("mobile"),
 								(String)map.get("email"),
-								(String)map.get("certificateLevel"));
+								(String)map.get("certificateLevel"),
+								(String)map.get("certificateStatus"),
+								Utils.mapToObject(
+										(Map<String, Object>)map.get(
+												"certificateInfo"),
+										CertificateInfo.class));
 			}
 			return result;
 		} catch (XmlRpcException e) {
@@ -215,8 +220,7 @@ public final class RaManager
 	 * @throws UniversignClientException Universign Exception.
 	 */
 	@SuppressWarnings("unchecked")
-	public ValidatorResult validate(ValidationRequest
-											validationRequest)
+	public ValidatorResult validate(ValidationRequest validationRequest)
 			throws UniversignClientException
 	{
 		Map<String, Object> requestMap = Utils.objectToMap(
